@@ -3740,6 +3740,14 @@ struct POSIX_SECURITY *ntfs_build_permissions_posix(
 	pxdesc = (struct POSIX_SECURITY*)malloc(
 				sizeof(struct POSIX_SECURITY)
 				+ alloccnt*sizeof(struct POSIX_ACE));
+	if (!pxdesc) {
+		ntfs_log_perror("Unable to allocate %zu bytes for "
+				"POSIX_SECURITY structure",
+				(size_t)(sizeof(struct POSIX_SECURITY) +
+					alloccnt*sizeof(struct POSIX_ACE)));
+		errno = ENOMEM;
+		return NULL;
+	}
 	k = 0;
 	l = alloccnt;
 	for (i=0; i<2; i++) {
