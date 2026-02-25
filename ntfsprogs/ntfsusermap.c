@@ -817,7 +817,7 @@ static boolean outputmap(const char *volume, const char *dir)
 
 		s = stat(fullname,&st);
 		if (!s) {
-			backup = (char*)malloc(strlen(fullname + 5));
+			backup = (char*)malloc(strlen(fullname) + 5);
 			strcpy(backup,fullname);
 			strcat(backup,".bak");
 #ifdef HAVE_WINDOWS_H
