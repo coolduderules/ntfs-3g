@@ -329,7 +329,7 @@ char *parse_mount_options(ntfs_fuse_context_t *ctx,
 				goto err_exit;
 			if ((poptl->flags & FLGOPT_OCTAL)
 			    && (!val
-				|| !sscanf(val, "%o", &intarg))) {
+				|| sscanf(val, "%o", &intarg) != 1)) {
 				ntfs_log_error("'%s' option needs an octal value\n",
 					opt);
 				goto err_exit;
@@ -339,7 +339,8 @@ char *parse_mount_options(ntfs_fuse_context_t *ctx,
 					intarg = 0;
 				else
 					if (!val
-					    || !sscanf(val, "%i", &intarg)) {
+					    || sscanf(val, "%i", &intarg) != 1)
+					{
 						ntfs_log_error("'%s' option "
 						     "needs a decimal value\n",
 							opt);
