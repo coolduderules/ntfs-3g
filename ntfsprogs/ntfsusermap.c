@@ -789,7 +789,6 @@ static boolean outputmap(const char *volume, const char *dir)
 #ifdef HAVE_WINDOWS_H
 	struct stat st;
 #endif
-	int s;
 
 	done = DENIED;
 	fullname = (char *)malloc(strlen(MAPFILE) + 1
